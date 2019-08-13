@@ -25,11 +25,11 @@ class EventController extends Controller
                 ]
                 );
         }
-        // return view('eventpage');
+        
+        $ruang = \App\Ruang::where('id', $id)->first();
+
         $calendar = \Calendar::addEvents($event);
-        return view('eventpage', compact('events','calendar', 'id'));
-        // dd($calendar);
-        // return view('eventpage');
+        return view('eventpage', compact('events','calendar', 'id', 'ruang'));
     }
 
     public function display($id){
@@ -40,17 +40,11 @@ class EventController extends Controller
     {
         $ruang_id = $request->get('ruang_id');
 
-        $this->validate($request,[
-            'ruang_id' => 'required',
-            'title' => 'required',
-            'color' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-        ]);
         $event = new Event;
 
         $event->title = $request->input('title');
         $event->ruang_id = $ruang_id;
+        $event->pic = $request->input('pic');
         $event->color = $request->input('color');
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
@@ -81,6 +75,7 @@ class EventController extends Controller
 
         $events->title = $request->input('title');
         $events->color = $request->input('color');
+        $events->pic = $request->input('pic');
         $events->ruang_id = $ruang_id;
         if($request->input('start_date_new')){
             $events->start_date = $request->input('start_date_new');
@@ -104,5 +99,19 @@ class EventController extends Controller
         $events->delete();
 
         return redirect()->route('events', $ruang_id)->with('success, data deleted');
+    }
+
+    public function addRuang()
+    {
+        return view('addRuang');
+    }
+
+    public function addRuangSave(Request $request)
+    {
+        $ruang = new \App\Ruang;
+        $ruang->ruang_name = $request->get('nama_ruang');
+        $ruang->save();
+
+        return redirect()->route('home');
     }
 }

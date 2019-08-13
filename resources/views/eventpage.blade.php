@@ -18,6 +18,10 @@
         .fr {
             float: right;
         }
+
+        .center {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -42,7 +46,9 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="background: #2e6da4; color: white;">
-                                full calendar example
+                            <div class="center">
+                                {{ $ruang->ruang_name }}
+                            </div>
                         </div>
                     </div>
                     @if (\Auth::user())

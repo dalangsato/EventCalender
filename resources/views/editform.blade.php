@@ -17,8 +17,12 @@
         <input type="hidden" name="id" value="{{ $events->id }}">
         <input type="hidden" name="ruang_id" value="{{ $events->ruang_id }}">
         <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" name="title" placeholder="Enter Name" value="{{$events->title}}">
+            <label>Meeting Name</label>
+            <input type="text" class="form-control" name="title" placeholder="Enter Meeting Name" value="{{$events->title}}">
+        </div>
+        <div class="form-group">
+            <label for="">PIC Name</label>
+            <input type="text" class="form-control" name="pic" placeholder="Enter PIC Name" value="{{ $events->pic }}">
         </div>
         <div class="form-group">
             <label>COLOR</label>

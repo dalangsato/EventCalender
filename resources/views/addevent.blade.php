@@ -21,10 +21,21 @@
                                     @csrf
                                     <input type="hidden" name="ruang_id" value="{{ $id }}">
                                     {{-- {{csrf_field() }} --}}
-                                        <input type="text" class="fom-control" name="title" placeholder="enter the name" id=""> <br><br>
-                                        <input type="color" class="fom-control" name="color" placeholder="enter the color" id=""> <br><br>
-                                        <input type="datetime-local" class="fom-control date" name="start_date" placeholder="enter the name" id=""> <br><br>
-                                        <input type="datetime-local" class="fom-control date" name="end_date" placeholder="enter the name" id=""> <br><br>                           
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="title" placeholder="Enter Meeting Name" id="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="pic" placeholder="Enter PIC Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="color" class="form-control" name="color" placeholder="enter the color" id="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control date" name="start_date" placeholder="enter the name" id="" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control date" name="end_date" placeholder="enter the name" id="" required>
+                                        </div>                           
                                         <input type="submit" class="btn btn-primary" name="submit" value="ADD">
                                 </form>
                             </div>

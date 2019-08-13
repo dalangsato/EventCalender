@@ -32,3 +32,5 @@ Route::get('/showdata/{id}', 'EventController@show')->name('show');
 Route::get('/editdata/{id}', 'EventController@edit')->name('edit');
 Route::delete('/deletedata/{id}', 'EventController@destroy')->name('delete');
 Route::post('/updatedata', 'EventController@update')->name('update');
+Route::get('/addRuang', 'EventController@addRuang')->name('addRuang');
+Route::post('/addRuang', 'EventController@addRuangSave')->name('addRuang');

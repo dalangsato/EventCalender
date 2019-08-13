@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 13, 2019 at 03:10 AM
+-- Generation Time: Aug 13, 2019 at 06:00 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -32,6 +32,7 @@ CREATE TABLE `events` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ruang_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pic` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
@@ -43,8 +44,8 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `ruang_id`, `title`, `color`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(5, 1, 'Kevin Cornelius', '#ff0000', '2019-08-13 13:00:00', '2019-08-13 15:00:00', '2019-08-12 20:09:18', '2019-08-12 20:09:18');
+INSERT INTO `events` (`id`, `ruang_id`, `title`, `pic`, `color`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
+(6, 1, 'ICT', 'Kevin Cornelius', '#000000', '2019-08-13 13:00:00', '2019-08-13 13:30:00', '2019-08-12 22:00:28', '2019-08-12 22:00:28');
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,8 @@ CREATE TABLE `ruangs` (
 
 INSERT INTO `ruangs` (`id`, `ruang_name`, `created_at`, `updated_at`) VALUES
 (1, 'Ruang 1', NULL, NULL),
-(2, 'Ruang 2', NULL, NULL);
+(2, 'Ruang 2', NULL, NULL),
+(3, 'Ruang 3', '2019-08-12 23:00:39', '2019-08-12 23:00:39');
 
 -- --------------------------------------------------------
 
@@ -169,7 +171,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -181,7 +183,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `ruangs`
 --
 ALTER TABLE `ruangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

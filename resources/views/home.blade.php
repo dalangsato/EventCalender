@@ -5,7 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">
+                    Dashboard
+
+                    <div style="float:right;">
+                        <a href="{{ route('addRuang') }}" class="btn btn-sm btn-success">Add Ruangan</a>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
