@@ -31,11 +31,11 @@
                 <td>{{$event->color}}</td>
                 <td>{{$event->start_date}}</td>
                 <td>{{$event->end_date}}</td>
-                <th><a href="{{action('EventController@edit',$event['id'])}}" class="btn btn-success">
+                <th><a href="{{ route('edit', $event->id) }}" class="btn btn-success">
                         Edit</a>
                     </th>
                 <th>
-                <form method="POST" action="{{action('EventController@destroy',$event['id'])}}">
+                <form method="POST" action="{{ route('delete', $event->id) }}">
                 @csrf
                 <input type="hidden" name="_method" value="Delete">
                 <button type="submit" class="btn btn-danger">

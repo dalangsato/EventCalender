@@ -8,13 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{action('EventController@update',$id)}}" method="POST">
-    {{csrf_field() }}
+<form action="{{ route('update') }}" method="POST">
+    @csrf
     <div class="container">
         <div class="jumbotron" style="margin-top: 5%">
         <h1>Update Your Data</h1>
         <hr>
-            <input type="hidden" name="_method" value="UPDATE">
+        <input type="hidden" name="id" value="{{ $events->id }}">
+        <input type="hidden" name="ruang_id" value="{{ $events->ruang_id }}">
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" name="title" placeholder="Enter Name" value="{{$events->title}}">
@@ -24,15 +25,22 @@
             <input type="color" class="form-control" name="color" value="{{$events->color}}">
         </div>
         <div class="form-group">
-            <label>Start Date</label>
-            <input type="datetime-local" class="form-control" name="start_date" value="{{$events->start_date}}">
+            <label for="">Start Date</label>
+            <input type="text" class="form-control" name="start_date" value="{{ $events->start_date }}" readonly>
         </div>
         <div class="form-group">
-            <label>End Date</label>
-            <input type="datetime-local" class="form-control" name="end_date" value="{{$events->end_date}}">
+            <label>New Start Date</label>
+            <input type="datetime-local" class="form-control" name="start_date_new">
         </div>
-        {{ method_field('PUT') }}
-        <button type="submit" name="submit" class="btn btn-success"> Update</button>
+        <div class="form-group">
+            <label for="">End Date</label>
+            <input type="text" class="form-control" name="end_date" value="{{ $events->end_date }}" readonly>
+        </div>
+        <div class="form-group">
+            <label>New End Date</label>
+            <input type="datetime-local" class="form-control" name="end_date_new">
+        </div>
+        <button name="submit" class="btn btn-success"> Update</button>
         </div>
     </div>
 </form>

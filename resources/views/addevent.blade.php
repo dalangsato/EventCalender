@@ -19,6 +19,7 @@
                                 <h1>Task: Add Data</h1>
                             <form method="POST" action="{{ route('addEvent') }}">
                                     @csrf
+                                    <input type="hidden" name="ruang_id" value="{{ $id }}">
                                     {{-- {{csrf_field() }} --}}
                                         <input type="text" class="fom-control" name="title" placeholder="enter the name" id=""> <br><br>
                                         <input type="color" class="fom-control" name="color" placeholder="enter the color" id=""> <br><br>

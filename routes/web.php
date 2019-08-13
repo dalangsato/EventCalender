@@ -12,12 +12,23 @@
 */
 
 Route::get('/', function () {
+    // $ruang = \App\Ruang::all();
     return view('welcome');
 });
 
-Route::resource('events','EventController');
+// Route::resource('events','EventController');
 Route::post('/addEvent', 'EventController@store')->name('addEvent');
-Route::get('/addeventurl','EventController@display');
+Route::get('/addeventurl/{id}','EventController@display');
 Route::get('/displaydata','EventController@show');
 route::get('/deleteevent','EventController@show');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/events/{id}', 'EventController@index')->name('events');
+Route::get('/showdata/{id}', 'EventController@show')->name('show');
+Route::get('/editdata/{id}', 'EventController@edit')->name('edit');
+Route::delete('/deletedata/{id}', 'EventController@destroy')->name('delete');
+Route::post('/updatedata', 'EventController@update')->name('update');

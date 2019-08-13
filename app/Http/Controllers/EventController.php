@@ -7,14 +7,9 @@ use App\Event;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($id)
     {
-        $events= Event::all();
+        $events= Event::where('ruang_id', $id)->get();
         $event= [];
         
         foreach($events as $row){
@@ -32,34 +27,21 @@ class EventController extends Controller
         }
         // return view('eventpage');
         $calendar = \Calendar::addEvents($event);
-        return view('eventpage', compact('events','calendar'));
+        return view('eventpage', compact('events','calendar', 'id'));
         // dd($calendar);
         // return view('eventpage');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function display(){
-        return view ('addevent');
+    public function display($id){
+        return view ('addevent', ['id' => $id]);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $ruang_id = $request->get('ruang_id');
+
         $this->validate($request,[
+            'ruang_id' => 'required',
             'title' => 'required',
             'color' => 'required',
             'start_date' => 'required',
@@ -68,77 +50,59 @@ class EventController extends Controller
         $event = new Event;
 
         $event->title = $request->input('title');
+        $event->ruang_id = $ruang_id;
         $event->color = $request->input('color');
         $event->start_date = $request->input('start_date');
         $event->end_date = $request->input('end_date');
             
         $event->save();
         // dd($event);
-        return redirect('events')->with('success','Events Added');
+        return redirect()->route('events', $ruang_id)->with('success','Events Added');
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
         $events = Event::all();
         return view('display')->with('events',$events);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $events = Event::find($id);
         return view('editform',compact('events','id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-     $this->validate($request,[
-         'title'=>'required',
-         'color'=> 'required',
-         'start_date'=> 'required',
-         'end_date'=> 'required',
-     ]);
-     $events = Event::find($id);
+        $id = $request->get('id');
+        $ruang_id = $request->get('ruang_id');
+        $events = Event::find($id);
 
-     $events->title = $request->input('title');
-     $events->color = $request->input('color');
-     $events->start_date = $request->input('start_date');
-     $events->end_date = $request->input('end_date');
-
-     $events->save();
-     return redirect('events')->with('success','Data Update');
+        $events->title = $request->input('title');
+        $events->color = $request->input('color');
+        $events->ruang_id = $ruang_id;
+        if($request->input('start_date_new')){
+            $events->start_date = $request->input('start_date_new');
+        } else {
+            $events->start_date = $request->get('start_date');
+        }
+        if($request->input('end_date_new')){
+            $events->end_date = $request->input('end_date_new');
+        } else {
+            $events->end_date = $request->get('end_date');
+        }
+        
+        $events->save();
+        return redirect()->route('events', $ruang_id)->with('success','Data Update');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $events = Event::find($id);
+        $ruang_id = $events->ruang_id;
         $events->delete();
 
-        return redirect('events')->with('success, data deleted');
+        return redirect()->route('events', $ruang_id)->with('success, data deleted');
     }
 }

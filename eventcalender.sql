@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 13, 2019 at 01:36 AM
+-- Host: localhost
+-- Generation Time: Aug 13, 2019 at 03:10 AM
 -- Server version: 5.7.24
--- PHP Version: 7.2.19
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eventcalendar`
+-- Database: `eventcalender`
 --
 
 -- --------------------------------------------------------
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `events` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `ruang_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` datetime NOT NULL,
@@ -42,12 +43,8 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `color`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(1, 'akhirnya', '#000000', '2019-08-01 10:30:00', '2019-08-08 08:30:00', '2019-08-12 00:16:46', '2019-08-12 17:01:11'),
-(3, 'asd', '#3c0ae9', '2019-08-21 00:00:00', '2019-08-21 00:00:00', '2019-08-12 00:41:02', '2019-08-12 00:41:02'),
-(4, 'qwe', '#000000', '2019-08-13 00:00:00', '2019-08-13 00:00:00', '2019-08-12 00:43:51', '2019-08-12 00:43:51'),
-(5, 'asdasd', '#000000', '2019-08-16 13:00:00', '2019-08-16 13:30:00', '2019-08-12 00:46:10', '2019-08-12 00:46:10'),
-(6, '17', '#000000', '2019-08-17 13:00:00', '2019-08-17 13:30:00', '2019-08-12 00:48:20', '2019-08-12 00:48:20');
+INSERT INTO `events` (`id`, `ruang_id`, `title`, `color`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
+(5, 1, 'Kevin Cornelius', '#ff0000', '2019-08-13 13:00:00', '2019-08-13 15:00:00', '2019-08-12 20:09:18', '2019-08-12 20:09:18');
 
 -- --------------------------------------------------------
 
@@ -68,7 +65,8 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_11_232738_create_events_table', 1);
+(3, '2019_08_11_232738_create_events_table', 1),
+(5, '2019_08_13_020459_create_ruangs_table', 2);
 
 -- --------------------------------------------------------
 
@@ -81,6 +79,27 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ruangs`
+--
+
+CREATE TABLE `ruangs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ruang_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ruangs`
+--
+
+INSERT INTO `ruangs` (`id`, `ruang_name`, `created_at`, `updated_at`) VALUES
+(1, 'Ruang 1', NULL, NULL),
+(2, 'Ruang 2', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -100,6 +119,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Administrator', 'admin@admin.com', NULL, '$2y$10$F2itcFmq7jH6PYD9cgGeQ.HI3U4kVNvOEmrX4bRIiFjwfup72G8nm', NULL, '2019-08-12 19:14:56', '2019-08-12 19:14:56');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -107,7 +133,8 @@ CREATE TABLE `users` (
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ruang_id` (`ruang_id`);
 
 --
 -- Indexes for table `migrations`
@@ -120,6 +147,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `ruangs`
+--
+ALTER TABLE `ruangs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -136,19 +169,35 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `ruangs`
+--
+ALTER TABLE `ruangs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`ruang_id`) REFERENCES `ruangs` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

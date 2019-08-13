@@ -10,6 +10,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    <style>
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+        
+        .fr {
+            float: right;
+        }
+    </style>
 </head>
 <body>
     <div calss="container">
@@ -36,9 +45,12 @@
                                 full calendar example
                         </div>
                     </div>
-                    <a href="/addeventurl" class="btn btn-success">+ADD </a>
-                    <a href="/displaydata" class="btn btn-primary"> Update </a>
-                    <a href="/deleteeventurl" class="btn btn-danger"> Delete </a> <br>
+                    @if (\Auth::user())
+                    <a href="/addeventurl/{{ $id }}" class="btn btn-lg btn-success"> ADD </a>
+                    <a href="{{ route('show', $id) }}" class="btn btn-lg btn-primary"> Update </a>
+                    <a href="{{ route('home') }}" class="btn btn-lg btn-info fr">Home</a>
+                    <div class="mb-10"></div>
+                    @endif
                     <div class="panel body">
                     {!! $calendar->calendar() !!}
                     {!! $calendar->script() !!}
