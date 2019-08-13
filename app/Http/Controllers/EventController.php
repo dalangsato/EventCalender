@@ -22,13 +22,19 @@ class EventController extends Controller
                 $row->id,
                 [
                     'color' => $row->color,
-                ]
-                );
+                    'pic' => $row->pic
+                ],
+                $row->pic
+            );
         }
         
         $ruang = \App\Ruang::where('id', $id)->first();
 
-        $calendar = \Calendar::addEvents($event);
+        $calendar = \Calendar::addEvents($event, [])->setCallbacks([
+            'eventClick' => 'function(event) {
+                alert(event.title + " - " + event.pic);
+            }'
+        ]);
         return view('eventpage', compact('events','calendar', 'id', 'ruang'));
     }
 
