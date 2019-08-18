@@ -28,7 +28,7 @@
     <div calss="container">
         <div class="jumbotron">
             <div calss="row">  
-                @if(count($errors) > 0)
+                {{-- @if(count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -41,7 +41,7 @@
                 <div class="alert alert-success">
                 <p>{{\Session::get('success' )}}</p>
                 </div>
-                @endif
+                @endif --}}
                 
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">

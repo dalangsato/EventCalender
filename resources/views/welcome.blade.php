@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Event Calender
+                    Meeting Room Management System
                 </div>
             </div>
         </div>

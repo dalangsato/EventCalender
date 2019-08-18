@@ -24,6 +24,15 @@
             <label for="">PIC Name</label>
             <input type="text" class="form-control" name="pic" placeholder="Enter PIC Name" value="{{ $events->pic }}">
         </div>
+        <div>
+            <label for="institusion">Ruangan</label>
+                <select name="ruang_id" id="ruang_id" class="form-control">
+                    <option value="" selected disabled>{{$events->ruang_id}}</option>
+                    {{-- @foreach ($events as $event )
+                        <option value="{{ $event->id }}">{{ $event->ruang_id }} - {{ $attend->bagian->name }}</option>
+                    @endforeach --}}
+                </select>
+        </div>
         <div class="form-group">
             <label>COLOR</label>
             <input type="color" class="form-control" name="color" value="{{$events->color}}">
