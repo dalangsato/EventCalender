@@ -45,20 +45,30 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $ruang_id = $request->get('ruang_id');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
-        $event = new Event;
+        $cekStart = Event::whereBetween('start_date', [$start_date, $end_date])->first();
+        $cekEnd = Event::whereBetween('end_date', [$start_date, $end_date])->first();
 
-        $event->title = $request->input('title');
-        $event->ruang_id = $ruang_id;
-        $event->pic = $request->input('pic');
-        $event->color = $request->input('color');
-        $event->start_date = $request->input('start_date');
-        $event->end_date = $request->input('end_date');
-            
-        $event->save();
-        // dd($event);
-        return redirect()->route('events', $ruang_id)->with('success','Events Added');
+        // dd($cekEnd);
 
+        if(!empty($cekStart) || !empty($cekEnd)) {
+            return redirect()->route('events', $ruang_id)->with('fail','Ruangan sudah dipakai.');
+        } else {
+            $event = new Event;
+
+            $event->title = $request->input('title');
+            $event->ruang_id = $ruang_id;
+            $event->pic = $request->input('pic');
+            $event->color = $request->input('color');
+            $event->start_date = $start_date;
+            $event->end_date = $end_date;
+                
+            $event->save();
+            // dd($event);
+            return redirect()->route('events', $ruang_id)->with('success','Events Added');
+        }
     }
 
     public function show()
