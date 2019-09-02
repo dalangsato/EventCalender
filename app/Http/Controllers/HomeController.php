@@ -23,8 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ruang = \App\Ruang::all();
+        $build = \App\Building::all();
         
-        return view('home', ['ruangs' => $ruang]);
+        return view('home', ['builds' => $build]);
     }
 }

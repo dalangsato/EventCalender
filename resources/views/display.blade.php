@@ -72,6 +72,7 @@ input[type="checkbox"]:disabled + .label-text:before{
         <div class="jumbotron"></div>
 
         <table class="table table-striped table-bordered table-hover">
+            <a href="{{ route('home') }}" class="btn btn-primary btn-lg" style="float:right; margin-bottom:10px;">Home</a>
             <thead class="thead">
                 <tr class="warning">
                     <th>id</th>
@@ -80,7 +81,7 @@ input[type="checkbox"]:disabled + .label-text:before{
                     <th>Ruangan</th>
                     <th>start date</th>
                     <th>end date</th>
-                    <th>setujui</th>
+                    {{-- <th>setujui</th> --}}
                     <th>update / edit</th>
                     <th>Delete</th>               
                 </tr>
@@ -91,16 +92,16 @@ input[type="checkbox"]:disabled + .label-text:before{
                 <td>{{$event->id}}</td>
                 <td>{{$event->title}}</td>
                 <td>{{$event->pic}}</td>
-                <td>{{$ruang->ruang_name}}</td>
+                <td>{{$event->ruang->ruang_name}}</td>
                 <td>{{$event->start_date}}</td>
                 <td>{{$event->end_date}}</td>
-                <th>
+                {{-- <th>
                     <div class="form-check" align="middle">
                     <label>
                         <input type="checkbox" name="check"> <span class="label-text"></span>
                     </label>
                     </div>
-                </th>
+                </th> --}}
                 <th><div align="middle"><a href="{{ route('edit', $event->id) }}" class="btn btn-success">
                         Edit</a></div>
                     </th>
