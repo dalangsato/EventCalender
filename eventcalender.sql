@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 13, 2019 at 06:00 AM
+-- Generation Time: Sep 02, 2019 at 02:12 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -25,6 +25,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `buildings`
+--
+
+CREATE TABLE `buildings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `building_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `buildings`
+--
+
+INSERT INTO `buildings` (`id`, `building_name`) VALUES
+(1, 'Gedung 1 (edit)');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `events`
 --
 
@@ -40,12 +58,24 @@ CREATE TABLE `events` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `events`
+-- Table structure for table `floors`
 --
 
-INSERT INTO `events` (`id`, `ruang_id`, `title`, `pic`, `color`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(6, 1, 'ICT', 'Kevin Cornelius', '#000000', '2019-08-13 13:00:00', '2019-08-13 13:30:00', '2019-08-12 22:00:28', '2019-08-12 22:00:28');
+CREATE TABLE `floors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `building_id` bigint(20) UNSIGNED NOT NULL,
+  `floor_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `floors`
+--
+
+INSERT INTO `floors` (`id`, `building_id`, `floor_name`) VALUES
+(2, 1, 'Lantai 1');
 
 -- --------------------------------------------------------
 
@@ -89,6 +119,7 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `ruangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `floor_id` bigint(20) UNSIGNED NOT NULL,
   `ruang_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -98,10 +129,8 @@ CREATE TABLE `ruangs` (
 -- Dumping data for table `ruangs`
 --
 
-INSERT INTO `ruangs` (`id`, `ruang_name`, `created_at`, `updated_at`) VALUES
-(1, 'Ruang 1', NULL, NULL),
-(2, 'Ruang 2', NULL, NULL),
-(3, 'Ruang 3', '2019-08-12 23:00:39', '2019-08-12 23:00:39');
+INSERT INTO `ruangs` (`id`, `floor_id`, `ruang_name`, `created_at`, `updated_at`) VALUES
+(2, 2, 'Ruang 1', '2019-09-01 19:10:08', '2019-09-01 19:10:08');
 
 -- --------------------------------------------------------
 
@@ -132,11 +161,24 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
+-- Indexes for table `buildings`
+--
+ALTER TABLE `buildings`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ruang_id` (`ruang_id`);
+  ADD KEY `events_ibfk_1` (`ruang_id`);
+
+--
+-- Indexes for table `floors`
+--
+ALTER TABLE `floors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `floors_ibfk_1` (`building_id`);
 
 --
 -- Indexes for table `migrations`
@@ -154,7 +196,8 @@ ALTER TABLE `password_resets`
 -- Indexes for table `ruangs`
 --
 ALTER TABLE `ruangs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ruangs_ibfk_1` (`floor_id`);
 
 --
 -- Indexes for table `users`
@@ -168,10 +211,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `buildings`
+--
+ALTER TABLE `buildings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `floors`
+--
+ALTER TABLE `floors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -183,7 +238,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `ruangs`
 --
 ALTER TABLE `ruangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -199,7 +254,19 @@ ALTER TABLE `users`
 -- Constraints for table `events`
 --
 ALTER TABLE `events`
-  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`ruang_id`) REFERENCES `ruangs` (`id`);
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`ruang_id`) REFERENCES `ruangs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `floors`
+--
+ALTER TABLE `floors`
+  ADD CONSTRAINT `floors_ibfk_1` FOREIGN KEY (`building_id`) REFERENCES `buildings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ruangs`
+--
+ALTER TABLE `ruangs`
+  ADD CONSTRAINT `ruangs_ibfk_1` FOREIGN KEY (`floor_id`) REFERENCES `floors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

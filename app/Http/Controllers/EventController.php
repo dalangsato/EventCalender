@@ -107,17 +107,150 @@ class EventController extends Controller
         return redirect()->route('events', $ruang_id)->with('success, data deleted');
     }
 
-    public function addRuang()
+    public function addGedung()
     {
-        return view('addRuang');
+        return view('gedung.addGedung');
+    }
+
+    public function addGedungSave(Request $request)
+    {
+        $gedung = new \App\Building;
+        $gedung->building_name = $request->get('nama_building');
+        $gedung->save();
+
+        return redirect()->route('home')->with('status', 'Berhasil menambahkan Gedung');
+    }
+
+    public function editGedung($id)
+    {
+        $gedung = \App\Building::find($id);
+
+        return view('gedung.editGedung', ['gedung' => $gedung]);
+    }
+
+    public function editGedungSave(Request $request)
+    {
+        $gedung = \App\Building::where('id', $request->get('id'))->first();
+
+        $gedung->building_name = $request->get('nama_building');
+
+        $gedung->save();
+
+        return redirect()->route('home')->with('status', 'Berhasil mengedit Gedung');
+    }
+
+    public function deleteGedung($id)
+    {
+        $gedung = \App\Building::find($id);
+
+        $gedung->delete();
+
+        return redirect()->route('home')->with('status', 'Berhasil menghapus Gedung');
+    }
+
+    public function detailGedung($id)
+    {
+        $floor = \App\Floor::where('building_id', $id)->get();
+
+        return view('lantai.index', ['floors' => $floor, 'id' => $id]);
+    }
+
+    public function addLantai($id)
+    {
+        return view('lantai.addLantai', ['id' => $id]);
+    }
+
+    public function addLantaiSave(Request $request)
+    {
+        $id = $request->get('id');
+
+        $floor = new \App\Floor;
+        $floor->building_id = $id;
+        $floor->floor_name = $request->get('floor_name');
+        $floor->save();
+
+        return redirect()->route('detailGedung', ['id' => $id])->with('status', 'Berhasil menambah Lantai');
+    }
+
+    public function editLantai($id)
+    {
+        $floor = \App\Floor::find($id);
+
+        return view('lantai.editLantai', ['floor' => $floor]);
+    }
+
+    public function editLantaiSave(Request $request)
+    {
+        $floor = \App\Floor::where('id', $request->get('id'))->first();
+
+        $floor->floor_name = $request->get('floor_name');
+
+        $floor->save();
+
+        return redirect()->route('detailGedung', ['id' => $floor->building_id])->with('status', 'Berhasil mengubah Lantai');
+    }
+
+    public function deleteLantai($id)
+    {
+        $floor = \App\Floor::where('id', $id)->first();
+        
+        $id = $floor->building_id;
+
+        $floor->delete();
+
+        return redirect()->route('detailGedung', ['id' => $id])->with('status', 'Berhasil menghapus Lantai');
+    }
+
+    public function detailLantai($id)
+    {
+        $ruang = \App\Ruang::where('floor_id', $id)->get();
+
+        return view('ruang.index', ['ruangs' => $ruang, 'id' => $id]);
+    }
+
+    public function addRuang($id)
+    {
+        return view('ruang.addRuang', ['id' => $id]);
     }
 
     public function addRuangSave(Request $request)
     {
+        $id = $request->get('id');
+
         $ruang = new \App\Ruang;
+        $ruang->floor_id = $id;
         $ruang->ruang_name = $request->get('nama_ruang');
         $ruang->save();
 
-        return redirect()->route('home');
+        return redirect()->route('detailLantai', ['id' => $id])->with('status', 'Berhasil menambah Ruangan');
+    }
+
+    public function editRuang($id)
+    {
+        $ruang = \App\Ruang::find($id);
+
+        return view('ruang.editRuang', ['ruang' => $ruang]);
+    }
+
+    public function editRuangSave(Request $request)
+    {
+        $ruang = \App\Ruang::where('id', $request->get('id'))->first();
+
+        $ruang->ruang_name = $request->get('ruang_name');
+
+        $ruang->save();
+
+        return redirect()->route('detailLantai', ['id' => $ruang->floor_id])->with('status', 'Berhasil mengubah Ruangan');
+    }
+
+    public function deleteRuang($id)
+    {
+        $ruang = \App\Ruang::where('id', $id)->first();
+
+        $id = $ruang->floor_id;
+
+        $ruang->delete();
+
+        return redirect()->route('detailLantai', ['id' => $id])->with('status', 'Berhasil menghapus Ruangan');
     }
 }

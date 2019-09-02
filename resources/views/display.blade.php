@@ -72,6 +72,7 @@ input[type="checkbox"]:disabled + .label-text:before{
         <div class="jumbotron"></div>
 
         <table class="table table-striped table-bordered table-hover">
+            <a href="{{ route('home') }}" class="btn btn-primary btn-lg" style="float:right; margin-bottom:10px;">Home</a>
             <thead class="thead">
                 <tr class="warning">
                     <th>id</th>
