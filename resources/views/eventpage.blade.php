@@ -63,6 +63,8 @@
                     </div>
                 </div>
             </div>
+            <div style="text-align: center">
+                    <img src="{{ asset('image/logo_ipc.png') }}" width="250px" height="125px" ></div>
         </div>
     </div>
 </body>
