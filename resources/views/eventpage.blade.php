@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Event Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
@@ -36,12 +36,17 @@
                         @endforeach
                     </ul>
                 </div>
-                @endif
-                @if (\Session::has('success'))
-                <div class="alert alert-success">
-                <p>{{\Session::get('success' )}}</p>
-                </div>
                 @endif --}}
+                @if (\Session::has('success'))
+                    <div class="alert alert-success">
+                        <p>{{\Session::get('success')}}</p>
+                    </div>
+                @endif
+                @if (\Session::has('fail'))
+                    <div class="alert alert-danger">
+                        <p>{{\Session::get('fail')}}</p>
+                    </div>
+                @endif
                 
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
