@@ -23,10 +23,13 @@
             text-align: center;
         }
     </style>
+    
 </head>
 <body>
     <div calss="container">
         <div class="jumbotron">
+                <div style="text-align: center; margin-bottom:5%; margin-top:0%;">
+                        <img src="{{ asset('image/logo_ipc.png') }}" width="250px" height="125px" ></div>
             <div calss="row">  
                 {{-- @if(count($errors) > 0)
                 <div class="alert alert-danger">
@@ -68,8 +71,8 @@
                     </div>
                 </div>
             </div>
-            <div style="text-align: center">
-                    <img src="{{ asset('image/logo_ipc.png') }}" width="250px" height="125px" ></div>
+            {{-- <div style="text-align: center">
+                    <img src="{{ asset('image/logo_ipc.png') }}" width="250px" height="125px" ></div> --}}
         </div>
     </div>
 </body>

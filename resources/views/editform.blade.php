@@ -12,6 +12,8 @@
     @csrf
     <div class="container">
         <div class="jumbotron" style="margin-top: 5%">
+                <div style="text-align: center; margin-bottom:5%; margin-top:0%;">
+                        <img src="{{ asset('image/logo_ipc.png') }}" width="50%" height="50%" ></div>
         <h1>Update Your Data</h1>
         <hr>
         <input type="hidden" name="id" value="{{ $events->id }}">

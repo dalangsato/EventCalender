@@ -81,7 +81,7 @@
             @endif
 
             <div class="content">
-                    <img src="{{ asset('image/logo_ipc.png') }}" width="400px" height="200px"><br><br>
+                    <img src="{{ asset('image/logo_ipc.png') }}" width="50%" height="50%"><br><br>
                 <div class=" m-b-md">
                     <h1> Meeting Room Management System </h1>
                 </div>

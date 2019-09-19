@@ -69,9 +69,11 @@ input[type="checkbox"]:disabled + .label-text:before{
 </head>
 <body>
     <div class="container">
-        <div class="jumbotron"></div>
+        {{-- <div class="jumbotron"></div> --}}
+        <div style="text-align: center; margin-bottom:5%; margin-top:0%;">
+                <img src="{{ asset('image/logo_ipc.png') }}" width="50%" height="50%" ></div>
 
-        <table class="table table-striped table-bordered table-hover">
+        <table class="table table-striped table-bordered table-hover" width="100%">
             <a href="{{ route('home') }}" class="btn btn-primary btn-lg" style="float:right; margin-bottom:10px;">Home</a>
             <thead class="thead">
                 <tr class="warning">
