@@ -25,6 +25,10 @@ route::get('/deleteevent','EventController@show');
 
 Auth::routes();
 
+Route::match(['GET', 'POST'], '/register', function() {
+    return redirect('/login');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/events/{id}', 'EventController@index')->name('events');
