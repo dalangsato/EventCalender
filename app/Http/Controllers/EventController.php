@@ -271,8 +271,8 @@ class EventController extends Controller
 
         $pdf = PDF::loadView('qrcode', ['id' => $id]);
 
-        return $pdf->download('data-ruang.pdf');
+        // return $pdf->download('data-ruang.pdf');
 
-        // return view('qrcode', ['id' => $id]);
+        return view('qrcode', ['id' => $id]);
     }
 }
