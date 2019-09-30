@@ -33,7 +33,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $ruang->ruang_name }}</td>
-                                        <td width="35%">
+                                        <td width="45%">
+                                            <a href="{{ route('qr-code', $ruang->id) }}" class="btn btn-warning mr">QR-Code</a>
                                             <a href="{{ route('events', $ruang->id) }}" class="btn btn-primary mr">Detail</a>
                                             <a href="{{ route('editRuang', $ruang->id) }}" class="btn btn-secondary mr">Edit</a>
                                             <a href="{{ route('deleteRuang', $ruang->id) }}" class="btn btn-danger mr">Delete</a>

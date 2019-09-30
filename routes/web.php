@@ -62,3 +62,6 @@ Route::get('/deleteRuang/{id}', 'EventController@deleteRuang')->name('deleteRuan
 
 Route::post('/addRuangSave', 'EventController@addRuangSave')->name('addRuangSave');
 Route::post('/editRuangSave', 'EventController@editRuangSave')->name('editRuangSave');
+
+//QR-Code
+Route::get('/qr-code/{id}', 'EventController@qrcode')->name('qr-code');

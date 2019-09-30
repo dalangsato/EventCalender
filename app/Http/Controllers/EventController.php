@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 
+use PDF;
+
 class EventController extends Controller
 {
     public function index($id)
@@ -262,5 +264,15 @@ class EventController extends Controller
         $ruang->delete();
 
         return redirect()->route('detailLantai', ['id' => $id])->with('status', 'Berhasil menghapus Ruangan');
+    }
+
+    public function qrcode($id)
+    {
+
+        $pdf = PDF::loadView('qrcode', ['id' => $id]);
+
+        return $pdf->download('data-ruang.pdf');
+
+        // return view('qrcode', ['id' => $id]);
     }
 }
