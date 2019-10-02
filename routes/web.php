@@ -23,7 +23,7 @@ Route::get('/displaydata','EventController@show');
 route::get('/deleteevent','EventController@show');
 
 
-Auth::routes();
+Auth::routes(['forget-password=>false']);
 
 Route::match(['GET', 'POST'], '/register', function() {
     return redirect('/login');
