@@ -91,10 +91,10 @@ class EventController extends Controller
     public function update(Request $request)
     {
         $id = $request->get('id');
-        $start_time_new = $request->input('start_time_new');
-        $end_time_new = $request->input('end_time_new');
         $ruang_id = $request->get('ruang_id');
         $events = Event::find($id);
+        $start_time_new = $request->input('start_time_new');
+        $end_time_new = $request->input('end_time_new');
         $start_date_new = $request->input('start_date_new').' '.$start_time_new;
         $end_date_new = $request->input('start_date_new').' '.$end_time_new;
 
