@@ -30,11 +30,13 @@
                                         <div class="form-group">
                                             <input type="color" class="form-control" name="color" placeholder="enter the color" id="" required>
                                         </div>
+                                        <label > Start Date</label></P>
                                         <div class="form-group">
-                                            <input type="datetime-local" class="form-control date" name="start_date" placeholder="enter the name" id="" required>
+                                            <input type="datetime-local"class="form-control date" name="start_date" placeholder="yyyy-mm-dd (space) TT:MM" id="" required>
                                         </div>
+                                        <label > End Date</label></P>
                                         <div class="form-group">
-                                            <input type="datetime-local" class="form-control date" name="end_date" placeholder="enter the name" id="" required>
+                                            <input type="datetime-local" class="form-control date" name="end_date" placeholder="yyyy-mm-dd (space) TT:MM" id="" required>
                                         </div>                           
                                         <input type="submit" class="btn btn-primary" name="submit" value="ADD">
                                 </form>

@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
             <label>New Start Date</label>
-            <input type="datetime-local" class="form-control" name="start_date_new">
+            <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd (space) TT:MM" name="start_date_new">
         </div>
         <div class="form-group">
             <label for="">End Date</label>
@@ -53,7 +53,7 @@
         </div>
         <div class="form-group">
             <label>New End Date</label>
-            <input type="datetime-local" class="form-control" name="end_date_new">
+            <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd (space) TT:MM" name="end_date_new">
         </div>
         <button name="submit" class="btn btn-success"> Update</button>
         </div>
