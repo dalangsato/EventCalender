@@ -45,16 +45,24 @@
         </div>
         <div class="form-group">
             <label>New Start Date</label>
-            <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd (space) TT:MM" name="start_date_new">
+            <input type="date"class="form-control date" name="start_date_new" id="" required>
         </div>
+            <div class="form-group">
+                    <input type="time" class="form-control date" name="start_time_new" id="" required>
+                </div>
+
         <div class="form-group">
             <label for="">End Date</label>
             <input type="text" class="form-control" name="end_date" value="{{ $events->end_date }}" readonly>
         </div>
         <div class="form-group">
             <label>New End Date</label>
-            <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd (space) TT:MM" name="end_date_new">
-        </div>
+                <input type="date"class="form-control date" name="end_date_new" id="" required>
+            </div>
+            <div class="form-group">
+                    <input type="time" class="form-control date" name="end_time_new" id="" required>
+                </div>
+
         <button name="submit" class="btn btn-success"> Update</button>
         </div>
     </div>

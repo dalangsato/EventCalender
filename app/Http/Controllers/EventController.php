@@ -47,8 +47,10 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $ruang_id = $request->get('ruang_id');
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        $start_time = $request->input('start_time');
+        $end_time = $request->input('end_time');
+        $start_date = $request->input('start_date').' '.$start_time;
+        $end_date = $request->input('end_date').' '.$end_time;
 
         $cekStart = Event::whereBetween('start_date', [$start_date, $end_date])->first();
         $cekEnd = Event::whereBetween('end_date', [$start_date, $end_date])->first();
@@ -58,6 +60,7 @@ class EventController extends Controller
         if(!empty($cekStart) || !empty($cekEnd)) {
             return redirect()->route('events', $ruang_id)->with('fail','Ruangan sudah dipakai.');
         } else {
+
             $event = new Event;
 
             $event->title = $request->input('title');
@@ -88,20 +91,24 @@ class EventController extends Controller
     public function update(Request $request)
     {
         $id = $request->get('id');
+        $start_time_new = $request->input('start_time_new');
+        $end_time_new = $request->input('end_time_new');
         $ruang_id = $request->get('ruang_id');
         $events = Event::find($id);
+        $start_date_new = $request->input('start_date_new').' '.$start_time_new;
+        $end_date_new = $request->input('start_date_new').' '.$end_time_new;
 
         $events->title = $request->input('title');
         $events->color = $request->input('color');
         $events->pic = $request->input('pic');
         $events->ruang_id = $ruang_id;
-        if($request->input('start_date_new')){
-            $events->start_date = $request->input('start_date_new');
+        if($start_date_new){
+            $events->start_date = $start_date_new;
         } else {
             $events->start_date = $request->get('start_date');
         }
-        if($request->input('end_date_new')){
-            $events->end_date = $request->input('end_date_new');
+        if($end_date_new){
+            $events->end_date = $end_date_new;
         } else {
             $events->end_date = $request->get('end_date');
         }
