@@ -16,6 +16,9 @@ class EventController extends Controller
         
         foreach($events as $row){
             // $enddate = $row->end_date."24:00:00";
+            \Calendar::setOptions([
+                'defaultView'=> 'agendaDay',
+            ]);
             $event[] = \Calendar::event(
                 $row->title,
                 false,
@@ -24,7 +27,7 @@ class EventController extends Controller
                 $row->id,
                 [
                     'color' => $row->color,
-                    'pic' => $row->pic
+                    'pic' => $row->pic,
                 ],
                 $row->pic
             );
