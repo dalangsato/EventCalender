@@ -38,9 +38,6 @@
                                                 <input type="time" min="00:00" max="24:00" class="form-control date" name="start_time" id="" required>
                                             </div>
                                         <label > End Date</label></P>
-                                        {{-- <div class="form-group">
-                                            <input type="datetime-local" class="form-control date" name="end_date" placeholder="yyyy-mm-dd (space) TT:MM" id="" required>
-                                        </div>                            --}}
                                         <div class="form-group">
                                                 <input type="date"class="form-control date" name="end_date" id="" required>
                                             </div>
